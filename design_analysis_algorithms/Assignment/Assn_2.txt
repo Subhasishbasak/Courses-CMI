@@ -1,0 +1,18 @@
+1) Generalize the solutions in class for Integer Multiplication and
+find solutions to T(N) = a T(N/b) + O(N) for a, b positive integers.
+
+2) Solve the recurrence T(N) = 2 T(N/2) + O(NlogN).
+
+The following problems are from Lecture 1 in Jeff Erickson's notes:
+
+3) Problem 3 on page 14.
+
+4) Problem 4 on Page 14,
+
+4) Problem 9 on page 17
+
+5) Problem 12 on page 18-19
+
+6) Problem 13 on Page 19
+
+7) Problem 14 on page 20

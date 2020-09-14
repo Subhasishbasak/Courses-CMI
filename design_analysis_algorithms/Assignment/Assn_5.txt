@@ -1,0 +1,17 @@
+1) Problem 13, Page 23, Jeff Erickson's Lecture notes, Lecture  5.
+
+2) Problem 35, Page 34, Jeff Erickson's Lecture notes, Lecture  5.
+
+3) Problem 3, Page 9, Jeff Erickson's Lecture notes, Lecture  7.
+
+4) Problem 6, Page 10, Jeff Erickson's Lecture notes, Lecture 7.
+
+5) Problem 7 (a), (b), Page 10 , Jeff Erickson's Lecture notes, Lecture  7.
+
+6) Given a word and a pattern find the number of non-overlapping occurrences of
+the pattern in the word. For instance given bcabababad and the pattern aba, the
+answer is 2: is one starting at position 3 and another starting at position 7.  
+
+7) Given a word find the length of the longest suffix of the word that is also
+a prefix of the word.
+

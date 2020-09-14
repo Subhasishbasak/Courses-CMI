@@ -1,0 +1,5 @@
+1-2) Problem 19, 21 on page 22 of Lecture 1 (Recursion) in Jeff Erickson's notes.
+3) Problem 25 on page 23 of the same Lecture
+4) Problem 26 on page 24 of the same Lecture 
+
+5) Problem 1 (b),(c),(d) and (e) of page 12 of  Lecture 2 (Backtracking) in Jeff Erickson's notes.

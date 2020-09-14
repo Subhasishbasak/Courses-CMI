@@ -1,0 +1,10 @@
+0. Read the entire Introduction (Chapter 0) from Jeff Erickson's Notes.
+
+1. Problems 3, 4 and 5 from the Exercises to Chapter 0 in the Notes.
+
+2. By "Substitute and check" verify which of the following hold for
+the Mergesort recurrence: T(N) <= c.NlogN for some c
+                          T(N) <= c.N for some c
+                          T(N) <= c.N^2 for some c.
+
+
