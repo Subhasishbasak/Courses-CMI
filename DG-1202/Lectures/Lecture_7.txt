@@ -1,0 +1,41 @@
+Subset sum. It is only "pseudo polynomial"
+
+  The complexity is O(NT) for  set with N elements and T is the value
+  that needs to be expressed as a sum. The size of the input is the number
+  of bits needed to write it down and so T will be written using logT bits.
+  Thus, the algorithm actually runs in exponential time on it in put size.
+  
+  Source: Jeff Erickson's notes, Section 5.6.1
+
+0-1 Knapsack.
+
+  An extension of the Subset Sum in two ways. Look for a subset whose
+  sum is less than or equal to T and the sum of whose "values" is maxmized.
+  A similar DP works.  Compute by DP the quantity Max(i,w) which is the 
+  maximum value that can be obtained from a subset of the elements a1 ... ai
+  whose sum is w. 0 <= i <= N, 0 <= w <= T.
+
+  Source: Algorithms by S. Dasgupta, C.H. Papadimitriou, and U.V. Vazirani
+          Section 6.4
+
+Knapsack with unbounded supply of objects:
+
+  Actually this is a simpler problem than the 0-1 to solve. This is because
+  you don't have to ensure that each ai is picked at most once! So, a simpler
+  quantity can be computed via DP. Max(w) : The maximum value that can be
+  obtained from a subset of elements whose sum is <= w.
+
+  Source: Algorithms by S. Dasgupta, C.H. Papadimitriou, and U.V. Vazirani
+          Section 6.4
+
+Maximal Independent sets in Trees:
+
+  An example where the problem description does not look like a list
+  or a grid. What is the sub-problem structure? For trees, there is 
+  a natural one. Pick any one vertex and "root" the tree there. 
+  The sub-problems are the "subtrees" rooted at the vertices in the tree.
+  The leaves are the base cases. Easy to implement DPs on trees --- use
+  DFS.
+
+  Source: Section 5.9 in Jeff Erickson's Notes.
+    

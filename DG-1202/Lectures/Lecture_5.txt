@@ -1,0 +1,47 @@
+*  Longest Ascending Subsequence: Given a sequence of number a1 a2 ... aN
+   find the length of the longest subsequence of the form
+     ai1 <= ai2 <= .. <= aik.
+
+   LAS[i] = longest ascending subsequence among ai ... aN does not help as 
+            it is not "inductive" (why?)
+
+   LAS[i] = longest ascending subsequence among ai ... aN that begins with ai
+            is inductive (as described below):
+
+
+   LAS[i] = 1 + Max_{j > i} {LAS[j] | A[i] <= A[j]} [with Max (emptyset) = 0 ]
+   LAS[N] = 1
+
+
+   this gives O(N^2) Solution. 
+
+   How do you find a witness sequence of this length?
+
+   Another solution (also O(N^2)), is to sort a1, ... , aN to get b1 ... bN
+   and find the length of the longest common subsequence.
+
+   Source: Algorithms by S. Dasgupta, C.H. Papadimitriou, and U.V. Vazirani,
+   Section 6.2.
+
+   A NlogN solution can be constructed as follows: As usual we proceed from
+   the right (i.e. N down to 1). We now maintain a list B as follows: 
+   B[k] is defined only if there is at least one ascending sequence of length
+   k starting at some position among i+1, ... N. Further, B[k] stores the
+   largest value of A[j]  among j > i such that there is a ascending sequence
+   of length k starting at j.  If a position has a ascending sequence of length
+   k starting from there on then it also has a as sequence of length k-1 startng   
+   from there. Thus if B[k] is defined then B[k-1] is also define and further
+   B[k-1] >= B[k]. In other words, B is always sorted.
+
+   At position i, we need to find the length of the largest k such that B[k] >= A[i].
+   This can be done by a binary search. This will result in LAS[i] being
+   set to k+1 and value of B[k+1] being updated if necessary. All of which 
+   can be done in O(log N) time. Thus, the algorithm works in O(NlogN) in all.
+
+
+* Shortest Paths in Graphs without negative cycles. The Bellman-Ford
+Dynamic Programming algorithm. 
+
+Source: Algorithms by S. Dasgupta, C.H. Papadimitriou, and U.V. Vazirani,
+Sections 6.6 (first subsection)
+

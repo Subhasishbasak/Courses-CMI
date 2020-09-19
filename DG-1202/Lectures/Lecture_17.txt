@@ -1,0 +1,67 @@
+Finding SCCs: Kosaraju's Algorithm
+
+  Source and Sink components.
+
+  Starting DFS from a sink component would terminate marking only the
+  vertices in that component.
+    
+  Exit numbering or Post numbering of vertices by DFS. The order in which
+  dfs exits the various nodes in the graph.
+
+  PostNo(C) = Max {Post(v) | v in C}
+
+  Key Lemma: If C and D are components with an edge from C to D then 
+             PostNo(C) > PostNo(D)
+
+  Proof: Recall the key property of DFS from the previous lecture. 
+         Thus, if among C and D if DFS were to visit a vertex v 
+         first and if v was in C, then DFS would visit all vertices
+         in C, D and more before returning from v. Thus, ExitNo(v) 
+         is the maximum among all vertices in C and D. If v is in D
+         then this call would terminate only after DFS visits and returns
+         from all vertices in D and more but before visiting any vertex
+         in C. Thus the ExitNo of every vertex in C is higher than that
+         of any vertex in D in this case.
+
+   
+  Exercise: Prove that it is NOT necessary that the vertex with PostNo 1 is 
+            in a sink component.
+
+  Claim: A vertex with PostNo  N (N = number of vertices) is always in a 
+         source component.
+
+  Second Key Idea: Reversing all the edges leaves the SCCs unchanged. 
+  But source components of G and Sink components of G-reverse. 
+
+  So, finding the vertex v with exit number N in the dfs on G and then running
+  dfs from v on G-reverse  will mark exactly one source component of G  
+  (equivalently, only sink component in G-reverse).
+
+  Actually, something even better holds. List vertices of V as 
+  v_1 v_2 .... v_N with PostNo(v_i) > postNo(v_{i+1}). Then, running 
+  dfs on G-reverse with the vertices considered in this order results 
+  in identifying the SCCs of G (and G-reverse). 
+
+  Source: 
+  Algorithms by S. Dasgupta, C.H. Papadimitriou, and U.V. Vazirani, Section 3.4
+
+Matchings in Bipartite Graphs:
+
+  Matchings --- sets of edges that do not share a vertex.
+
+  Bipartite graphs --- V = V_0 U V_1 s.t. all edges connect V_0 with V_1.
+  Existence of Odd cycle ===> Not Bipartite
+  BFS trees. All non-tree edges connect only vertices in same or adjacent levels.
+  If there is an edge connecting vertices there is an odd cycle and so the
+  graph is not bipartite.
+  If all non-tree edges connect only adjacent levels then the graph is bipartite  -- simply put even number levels in V_0 and odd numbered levels in V_1.
+  Thus a graph is bipartite if and only if it has no odd cycles. Further
+  one can obtain a bipartition via BFS.
+
+  Finding the maximum sized matchings in a bi-partite graph.
+
+  Alternating paths, augmenting paths.  
+
+http://math.mit.edu/~goemans/18433S13/matching-notes.pdf (page 1-3)  
+
+

@@ -1,0 +1,41 @@
+* Optimal access files on a sequential store.
+
+   N files. ith File has size L[i]. Store them in some
+   order, say i1, i2, .. iN. Then the cost of accessing the
+   file ij is L[i1] + L[i2] ... + L[ij].  Assuming file i is
+   accessed F[i] times find the optimal order of storing the files.
+
+   Greedy solution: Store by increasing order of the ratio of
+   the length to the frequency. Proof by an exchange argument.
+
+Source: Jeff Erickson's Lecture Notes, Section 7.1
+
+* Scheduling a collection of Jobs (given by starting and ending time
+  points)  on minimum number of machines.
+
+  [ Counter example for why repeated application of the algorithm
+    that schedules maximum number on a single machine:
+
+    (2,3),(4,5) (7,8)(9,10) (12,13),(14,15)
+   (1,6)                   (11,16)
+               (6,11)
+
+  ]
+  Greedy solution which sorts by increasing order of starting time
+  and scheduling on the first available machine works. Correctness
+  by establishing that it uses at most "depth" number of machines
+  which is also a lower bound. 
+
+Source: Algorithm Design (Edition 1) by Jon Kleinberg & Eva Tardos, Section 4.1,
+last subsection.
+
+* Given list of jobs with lengths li and deadline di, schedule them so that
+  the  maximum delay ( delay = time of completion - deadline)  is minimized.
+  
+  Greedy scheduling in order of deadlines works. Proof by an exchange argument.
+
+Source: Algorithm Design (Edition 1) by Jon Kleinberg & Eva Tardos, Section 4.2.
+
+* Dijkstra's Shortest Path Algorithm:
+
+  Description of the algorithm. The easy implementation with |V|^2 running time.

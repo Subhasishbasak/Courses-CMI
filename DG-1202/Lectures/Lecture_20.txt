@@ -1,0 +1,109 @@
+The Augmenting path method implemented via shortest autmenting path
+(in terms of the number of edges on the path) is polynomial time:
+
+   1) Show that the distance of any vertex v from the source s in the ith
+     residual graph is <= its distance in the i+1 residual graph (if you
+     follow augmentation by shortest paths).  Proof by induction on 
+     distance from s in the ith residual graph.
+     
+   2) Each augmentation removes one edge from the residual graph, the 
+     "bottle neck edge" with least leeway.  
+
+   3) If an edge u-->v  has to be the "removed edge" in an augmentation 
+     repeatedly then it has to be reintroduced repeatedly. Reintroducing
+     u-->v in the residual graph means the previous augmenting path (the
+     shortest augmenting path) used v--->u. Thus, the distance to u 
+     from s increases by at least 2 each time u->v leaves and reappears.
+    
+     So, u->v can be a "removed edge" only V/2 times. So, total number
+     of augmentations is bounded by E.V/2. 
+
+Source: Jeff Erickson's notes. Lecture 23.6.2
+
+     
+Applications of Flow:
+
+a) Bipartite matching as a flow. Essentialy use of integrality. 
+   Augmenting paths in the matching sense are the same as the augmenting paths
+   as defined for flows.
+
+Source: Jeff Erickson's notes. Lecture 24.3
+        Kleinberg and Tardos, Algorithm Design (Edition 1), Section 7.5
+
+b) Mengers Theorems
+
+1. Edge Disjoint s-t paths in a directed graph. 
+(The size of the largest such set is the same as the size of the smallest
+set of edges whose deletion disconnects s from t)
+
+
+   Convert graph into network by marking each edge to be of capacity 1.
+   Any integral flow has an equivalent loop-free flow.
+   Any loop free integral flow of size K gives K edge disjoint paths.
+   Any set of K edge disjoint paths gives a loop free integral flow of size K.
+   So, MaxFlow = Size of largest edge disjoint path set.
+
+   Any cut S,T of size K gives a edge cut set of size K (since capacities are 1)
+   Any set of edges X that disconnect s from t must contain the edges of the
+   (S,T) cut where S is the set of vertices reachable from s using E-X.  
+   Thus, size of smallest cut-set is same size of smallest set of edges 
+   that disconnect s from t.
+
+   Thus, we have 1. Also we can compute these sets using Network flows.
+
+2. For Undirected graphs.  Replace each undirected edge u--v by two directed
+   edges u-->v and v-->u. Then treat it as a network with capacities set to 1
+
+    Any integral flow has an equivalent sized loop-free flow.
+    A loop free flow of size K induces a set of K (directed) edge 
+    disjoint paths.
+    These paths are also edge disjoint in the undirected underlying graph
+    as the original flow is loop free.
+    Thus, the maximal flow in our network represents a largest set of edge
+    disjoint paths in the undirected graph.
+
+    An S,T cut in the Network removes (u,v) edge for u in S and v in T 
+    whenever such an edge exists. Thus it removes all edges between S and T
+    in the underlying graph and hence disconnects s from t in the underlying
+    undirected graph. If X is a set of edges in the undirected graph that
+    disconnects s from t, take S to be set of vertices reachable from s 
+    after deleting X in the undirected graph. Let T be the rest. It is
+    clear that the size of the S,T cut is exactly the size of X. 
+
+    Thus we have 2.
+
+3.  Vertex disjoint paths in directed graphs. Construct a network where
+    each vertex v is replaced by two vb and ve. There is an edge from  
+    vb to ve and we set its capacity to 1.  Any edge from u to v in the 
+    original is replaced by an edge from ue to vb of capacity infinity. 
+  
+    Use the fact that each "vertex" (vb-->ve) has capacity 1.  Thus
+    integeral flows translate to vertex disjoint paths and vice versa.
+    No cut can use an infinite capacity edge. Thus cuts remove "vertices".
+    
+
+Source: Jeff Erickson's notes: 24.1, 24.2
+        Kleinberg and Tardos, Algorithm Design (Edition 1), 7.6
+
+
+Other Applications:
+
+Survey. Products P1, ... Pk. Buyers B1, ... , Bm. We know which buyer
+bought which product. Aim is to design a survey where no buyer answers
+more than b questions (and only answers questions about products he has
+bought) and where each product is part of q question at most p times.
+
+    Construct a network. Nodes P1, .. Pk, B1, ... Bm and s, t.
+    Edges from s to B1, ... Bm, each of capacity b. 
+    Edges from P1, ... Pk to t, each of capacity p.
+    Edge from Bi to Pj if Bi bought Pj. Capacity 1.
+
+An integral flow in this network picks out a set of edges Bi-Pj indicating
+Bi was asked about Pj. Total number of questions asked of a buyer or about
+a product meets the constraints as required. Easy to see that given a 
+valid survey we can construct such an integral flows as well. Thus, finding
+a survey is same as finding a flow. A maximal integeral flow gives a maximal
+set of survey questions that meet the requirements.
+
+Example of an "assignment problem". For more on such problems read:
+Jeff Erickson's notes, Section 24.4.

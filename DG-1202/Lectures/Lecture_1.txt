@@ -1,0 +1,35 @@
+Textbooks/Lecture Notes:
+------------------------
+
+1) Lecture Notes by Jeff Erickson 
+   http://jeffe.cs.illinois.edu/teaching/algorithms/
+2) Algorithm Design (Edition 1) by Jon Kleinberg & Eva Tardos
+3) Algorithms by S. Dasgupta, C.H. Papadimitriou, and U.V. Vazirani
+   (available online)
+4) Introduction to Algorithms (3rd Edition) by Charles E. Leiserson, Clifford Stein, Ronald Rivest, and Thomas H. Cormen
+
+
+Recall big-O, big-Omega and big-Theta notations.
+
+Stable Matching:
+---------------
+
+Matching, complete matchings, stable matchings, Boston Pool algorithm,
+its correctness. Optimality of Boston Pool w.r.t "Hospitals".
+
+Source:
+Lecture Notes by Jeff Erickson: Section 0.5
+
+
+Solving by reduction to Subproblems --- recursion:
+--------------------------------------------------
+
+Towers of Hanoi and its recursive Solution.
+
+Mergesort, the recurrence for its complexity.
+
+Solution to the recurrence via substitution and expansion, via recursion
+trees.
+
+
+

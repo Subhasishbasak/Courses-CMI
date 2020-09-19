@@ -1,0 +1,80 @@
+* Maximal Matchings in Bipartite graphs.
+
+   If M is not Maximum sized then it admits a augmenting path.
+   (take symmetric difference with a maximum sized matching MO
+   in the resulting graph all vertices have deg <= 2. So,
+   it is a collection of even length alternating (between M-MO and MO-M)
+   cycles, isolated vertices and alternating paths.  At least one
+   of the paths is of odd length with one extra edge from MO-M. 
+   This must be an augmenting path.
+
+   Thus a matching is maximum sized if and only if it does not
+   admit an augmenting path.
+
+   Augmenting paths can be found by a single BFS  "starting" from
+   all the exposed vertices in V_0 and using non-matching and matching
+   edges at alternate levels (equiv. orient nonmatching from V_0 to V_1
+   and matching edges from V_1 to V_0 and run BFS on this directed graph)
+   till another exposed vertex is found.
+
+   Complexity is therefore |V||E|.
+
+* Konig Egervary Theorem:
+
+  A vertex cover: a subset of vertices that touches all the edges in the graph.
+  Every vertex cover must pick at least one end of each edge in any matching M. 
+  These are all distinct vertices by the defn. of matching. Thus, size of
+  any vertex cover is at least the size of any matching. That is, the size of 
+  the maximum matching <= size of the minimal vertex cover.
+
+  Konig Egervary theorem says that for bipartite graphs equality holds. 
+  Such a vertex cover can be constructed by looking for augmenting paths
+  from a maximal matching (which won't be successful!). Let L be the
+  set of vertices reachable via alternating paths starting at exposed vertices
+  in V_0. Take (V_0 - L) U (V_1 intersection L) and show that it is the
+  desired vertex cover. 
+
+Source:  http://math.mit.edu/~goemans/18433S13/matching-notes.pdf (page 3-4).
+
+Network Flows:
+
+Directed graph with special vertices s and t. 
+
+Flow f: Function from edges to positive real numbers, satisfying the 
+        "flow condition": sum of flow out of a vertex equals sum of 
+        flow into the vertex for all vertices other than s and t
+
+Value of f: |f| defined to be net flow out of s (i.e. flow out of s minus
+            flow into s). If s has no incoming edges this is just flow out of s.
+    
+First Lemma: |f| is the net flow into t (i.e. total flow into t minus total
+             flow out of t). Again this is just the flow into t if t has
+             no outgoing edges.
+
+Capacties: A function c from edges to positive real numbers giving maximum
+           flow allowed in each edge. 
+
+A feasible flow is a flow that satisfies the "capacity constraint" (i.e. 
+flow in each edge is <= capacity) and the "flow constraint".
+
+Observations: value of any feasible flow is less than or equal to sum of
+capacities of edges leaving s. Similarly it is less than or equal to the
+sum of capacities of edges entering t.
+
+Generalization: If S U T is a division of V such that s in S and t in T then
+the value of any feasible flow f is less than or equal to the sum of the
+capacities of the edges from S to T. The latter quantity is the size of
+the cut S,T.
+
+(so far all these proofs just involving writing the flow for each edge twice,
+regrouping and using the flow condition, and finally the constraint condition
+to get the inequalities)
+
+Thus Any Flow has value <= Any Cut
+In particular Max Flow has value <= Minimum Cut.
+
+Source: Jeff Erickson's notes. Lecture 23 (Maximum Flows and Minimum Cuts). Upto Section 23.2
+
+ 
+
+    

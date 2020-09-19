@@ -1,0 +1,184 @@
+1) Given an array. Find an element that is bigger than its neighbours.
+
+   --- Try your hand at divide and conquer.
+
+2) Finding the best segment sum in a sequence of integers.
+
+   Naive Algorithm: Pick each i,j with 1 <= i <= j <= N and sum up interval,
+   find the maximum.
+
+   Slightly better: Compute prefix sums. Then do the Naiave algorithm, but now
+   interval sums can be found in constant time. O(N^2)
+
+   Divide and Conquer: Divide into two equal halves and combine results
+   as follows:
+
+     BSS [i..j]  = Max { BSS [i..m], BSS [m+1..j], Best Overlapping Sum }
+
+     where m = i+j/2.
+
+     Best overlapping sum is just the best suffix sum of [ i.. m ] and
+     the best prefix sum of [ m+1..j ]. This can be found in linear time.
+     This gives the recurrence
+
+      T(N) = 2 T(N/2) + O(N)
+
+     and a O(NlogN) algorithm.
+
+
+   Better Divide and Conquer: For each segment, find not just BSS but also
+   the best suffix sum (BSuf) and the best prefix sum (BPref). Then
+
+     BSS [i..j]  = Max { BSS [i..m], BSS [m+1..j], BSuf [i..m] + BPref[m+1..j] }
+     BPref[i..j] = Max { BPref[i..m], Sum[i..m] + BPref[m+1..j] }
+     BSuf[i..j]  = Max { Bsuf[m+1..j], BSuf[i..m] + Sum[m+1..j] }
+
+  Thus assuming that Sum[i..j] can be computed for all pairs in constant time,
+  we get the recurrence
+
+    T(N) = 2T(N/2) + O(C)
+
+ This gives O(N) (Why?). Also we can precompute prefix sums in linear time
+ to be able to answer Sum queries in constant time and so the overall algorithm
+ works in O(N) time.
+2) * Finding the best segment sum in a sequence of integers.
+
+   Naive Algorithm: Pick each i,j with 1 <= i <= j <= N and sum up interval,
+   find the maximum.
+
+   Slightly better: Compute prefix sums. Then do the Naiave algorithm, but now
+   interval sums can be found in constant time. O(N^2)
+
+   Divide and Conquer: Divide into two equal halves and combine results
+   as follows:
+
+     BSS [i..j]  = Max { BSS [i..m], BSS [m+1..j], Best Overlapping Sum }
+
+     where m = i+j/2.
+
+     Best overlapping sum is just the best suffix sum of [ i.. m ] and
+     the best prefix sum of [ m+1..j ]. This can be found in linear time.
+     This gives the recurrence
+
+      T(N) = 2 T(N/2) + O(N)
+
+     and a O(NlogN) algorithm.
+
+
+   Better Divide and Conquer: For each segment, find not just BSS but also
+   the best suffix sum (BSuf) and the best prefix sum (BPref). Then
+
+     BSS [i..j]  = Max { BSS [i..m], BSS [m+1..j], BSuf [i..m] + BPref[m+1..j] }
+     BPref[i..j] = Max { BPref[i..m], Sum[i..m] + BPref[m+1..j] }
+     BSuf[i..j]  = Max { Bsuf[m+1..j], BSuf[i..m] + Sum[m+1..j] }
+
+  Thus assuming that Sum[i..j] can be computed for all pairs in constant time,
+  we get the recurrence
+
+    T(N) = 2T(N/2) + O(C)
+
+ This gives O(N) (Why?). Also we can precompute prefix sums in linear time
+ to be able to answer Sum queries in constant time and so the overall algorithm
+ works in O(N) time.
+
+ Can we find the Best Subsequence Sum among A[1] ... A[i+1] (BSS[i+1])
+from the answer for the subproblem A[1] ... A[i] (BSS[i])? It has to be
+done on constant time to obtain a linear time algorithm overall.
+
+Once again we realize the BSS[i+1] will depend not only on BSS[i] but
+also the best suffix sum of A[1] ... A[i] (BSuf[i]). In particular:
+
+BSS[i+1]  =  Max (BSS[i], A[i+1], BSuf[i]+A[i+1]) and
+BSuf[i+1] =  Max (A[i+1], BSuf[i] + A[i+1])
+
+Computing both of these for each i gives us an answer to the BSS problem.
+As an aside note that we only need to compute BSuf for each i and then
+we can compute BSS as
+
+BSS[N] = Max_{1 <= i <= N} BSuf[i]
+
+Can translate this directly into a recursive program:
+
+BSuf(i)
+   if i == 1 return A[1]
+   else return Max(BSuf(i)+A[i+1], A[i+1])
+
+Runs in linear time.  Can also translate this to a iterative
+program. Observing that BSuf[i] depends on BSuf[i-1], we begin
+with BSuf[1].
+
+    BSuf[1] = A[1]
+    for i in 2 to N
+      BSuf[i] =  Max(BSuf[i] + A[i+1], A[i+1]).
+
+
+3) Counting Grid Paths.
+
+  Given a m x n matrix with entries from [0,1] count the number of paths
+  from 1,1 to m,n that moves either to right or down in each step and never
+  enters a cell with a 0.
+
+  If all entries are 1 then one can get a closed form expression (m+n) C n
+
+  Subproblem: Given (i,j) find the number of such paths from (1,1) to (i,j).
+
+  Observation:  Any such grid path to (i,j) must move there from (i-1,j)
+  or (i,j-1).  Actually there is a 1-1 correspondence between grid paths
+  entering (i,j) from above and the number of grid paths to (i-1,j) and
+  a similar 1-1 correspondence between number of grid paths entering (i,j)
+  from the left and the number of grid paths to (i,j-1). Thus we have:
+
+  PathC[i,j] = 0   if A[i,j] = 0
+             = PathC[i-1,j] + PathC[i,j-1] otherwise.
+            {where PathC[i',j']  is 0 if i' or j' is out of range}
+
+  where PathC[1,1] = 1 if A[1,1] = 1 and it is 0 otherwise.
+
+
+  Here is a recursive program to solve the problem:
+
+  PathC(i,j) =   if A[i,j] = 0 then return 0
+                 elseif i == 1 and j == 1 then return 1
+                 elseif i == 1 return PathC(i,j-1)
+                 elseif j == 1 return PathC(i-1,j)
+                 else return PathC(i-1,j) + PathC(i,j-1)
+
+  A naive implmentation of this recursive algorithm will take forever!!
+  The reason is that sub-problems are evaluated again and again:
+
+  PathC(4,4) --> PathC(4,3), PathC(3,4)
+  PathC(4,3) --> PathC(3,3), PathC(4,2)
+  PathC(3,4) --> PathC(3,3), PathC(2,4)  - PathC(3,3) repeats already
+  PathC(3,3) --> PathC(2,3), PathC(3,2)
+  PathC(4,2) --> PathC(3,2), PathC(2,2)
+  PathC(2,4) --> PathC(2,2), PathC(2,3)
+  PathC(3,2) --> ....
+
+  The smaller (i,j) the more number of times PathC(i,j) will be called.
+  Here is an easy way to conclude that the number of calls to small values
+  (i,j), say 1,1 is large: Number calls to PathC(1,1) resulting from a call
+  to PathC(i,j) is the number of calls due to PathC(i-1,j) and the number of
+  calls due to PathC(i,j-1)! So, it "roughly" doubles as the dimension of the
+  grid increases.
+
+
+
+  The trick is not to repeatedly calls PathC(i,j), instead store the answer
+  the first time it is called and then reuse it during later calls -- this
+  technique is called memoization (not an English word unfortunately).
+  Here is a memoized version of the algorithm:
+
+
+  P[i,j] = -1 for all 1 <= i <= m, 1 <= j <= n
+
+  PathC(i,j) =   if P[i,j] >= 0 then return P[i,j]
+                 elseif if A[i,j] = 0 then  P[i,j] = 0
+                 elseif i == 1 and j == 1 then P[i,j] = 1
+                 elseif i == 1 P[i,j] = PathC(i,j-1)
+                 elseif j == 1 P[i,j] = PathC(i-1,j)
+                 else P[i,j] = PathC(i-1,j) + PathC(i,j-1)
+                 return P[i,j]
+
+ This version only spends constant amount of time in computing each cell
+ works in time proportional to the number of cells overall.
+

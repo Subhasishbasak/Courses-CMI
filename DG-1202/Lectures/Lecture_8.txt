@@ -1,0 +1,41 @@
+* Chain matrix multiplication:
+
+  What is the cheapest way to multiply out the matrices M_1 M_2 ... M_{n-1}
+  where matrix M_i has dimension ai x ai+1
+
+  Dynamic programming considering all segments (i..j).
+
+  How to recover a bracketing that yields the optimal cost? [Exercise]
+
+Source: Algorithms by S. Dasgupta, C.H. Papadimitriou, and U.V. Vazirani,
+Sections 6.5
+
+Source: 
+
+* Scheduling maximum number of lectures (with starting and ending times)
+  without overlap in a single lecture hall (or equivalently picking a set
+  of lectures to attend).
+
+  DP solution after sorting the intervals by starting point: either the
+  first interval is in the solution or not ...  O(n^2) or O(nlogn) via binary
+  search.
+
+  Greedy solution. Sort by increasing ending times and schedule "greedily".
+  Proof of correctness by an exchange argument.
+
+Source: Jeff Erickson's Lecture Notes,  Section 7.2
+        Algorithm Design (Edition 1) by Jon Kleinberg & Eva Tardos, 
+        Section 4.1 (First subsection)
+
+* Optimal access files on a sequential store.
+
+   N files. ith File has size L[i]. Store them in some
+   order, say i1, i2, .. iN. Then the cost of accessing the
+   file ij is L[i1] + L[i2] ... + L[ij].  Assuming each
+   file is accessed once (or equivalently, equal number of times)
+   find the optimal order of storing the files.
+
+   Greedy solution: Store by increasing order of lengths. Proof
+   by an exchange argument.
+
+Source: Jeff Erickson's Lecture Notes, Section 7.1

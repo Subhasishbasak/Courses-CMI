@@ -1,0 +1,122 @@
+* Brief discussion of Midsem question paper.
+
+* Using Suffix Arrays to construct the BW Transform.
+  
+* Constructing the Suffix Array:  
+
+  Naive: N^2 logN
+  
+  By comparing strings of length 1,2,4, .. logN. 
+
+  Let Rank[j,i] the "strict rank" in the lexicographic ordering
+  of the string of length 2^j starting at position i, among
+  the N strings of length 2^j at the different positions in the string.
+  (assume the string is padded with some $ < all letters, if necessary).
+
+  Strict rank of an element i is the number of elements that are  
+  strictly smaller than i.
+
+  For instance if the word is abbab then 
+    Rank[0,1] = Rank[0,4] = 0
+    Rank[0,2] = Rank[0,3] = Rank[0,5] = 2 
+
+  The key observation is that one may compute Rank[j+1,i] as follows:
+  Create a list of entries (Rank[j,i],Rank[j,i+2^j],i).  Use -1  for the
+  second component if i+2^j > N. The third component is just keep track of the 
+  index i and is not used in the comparisons (it can be. It makes no difference)
+
+  Notice that comparing the strings of length 2^(j+1) at positions i1 and i2
+  in lexicographic ordering is is the same as comparing the triples
+  (Rank[j,i1],Rank[j,i1+2^j) and (Rank[j,i2],Rank[j,i2+2^j). 
+ [Notice how it is important that our assignment of ranks assigns the SAME
+  rank if the corresponding segments are equal]
+
+  Thus we sort these triples and then scan the resulting sorted triples
+  from smallest to the largest and compute Rank[j+1,i] for all i as follows:
+  Suppose the sorted sequence looks like:
+  (x1_,y_1,i_1), (x_2,y_2,i_2), ... (xN,yN,i_N)
+   
+  Then Rank[j+1,i_1] = 0
+  In general, Rank[i_(r+1)] = Rank[i_r] if (x_(r+1),y_(r+1)) = (x_r,y_r)
+                            = r         Otherwise
+
+  Thus, we have only logN rounds. Each round is just some linear amount
+  of work to construct the triples, then a sorting, followed by linear amount
+  of work to construct the Rank values for j+1. So the total cost is
+  logN . (NlogN).
+
+  We can sort better.  If we are sorting a list (of N values) whose entries
+  are from the range 1..K we can do the following: go through the list 
+  forming "linked lists" of all the 1's, all the 2's and so on till all
+  the K's. Then combine them. This clearly takes time only proportional 
+  to N  + K.  This is called "counting sort" since instead
+  of making linked lists we could just count the number of 1's etc. In  
+  our case we need the "linked list" (as is the case if what is sorted is
+  not just the number values but some more complex data of which the number
+  is just a key).
+
+  We first sort them using the second component using the linked lists. 
+  then sort them using the first component using linked lists (Why?). 
+  Since K in our case is O(N) the sorting will only take linear time. 
+
+  Thus we have a O(NlogN) technique to construct Suffix Arrays. There 
+  are cleverer methods that achieve O(N) running time.
+
+  
+* Using Suffix arrays means we only use additional space linear in the
+  size of the input string in order to compute the BWT. This is very 
+  useful in practice. A naive implementation will use N^2 space.
+
+
+* Once you have a suffix array for a string S, we can check if a word 
+  (often called "pattern") appears in S as a substring.  If it appears
+  it appears as the prefix of some suffix of S. Since the Suffix array
+  lists suffixes in lexicographically sorted order one can search 
+  for the pattern using binary search. Of course, each comparison may
+  take time proportional to M (length of the pattern). The binary search
+  will take logN rounds (N is the length of S). Thus overall our algorithm
+  take MlogN time.
+
+  By searching the first and last occurrences of the pattern, via two 
+  binary searches, we can also find the number of occurrences of the pattern
+   as well as list all the occurrences if necessary.
+
+  This can be improved to O(M+logN) using a bit more sophisticated ideas:
+  using what is called the LCP array (we will see LCP array in the next class
+  but perhaps not the O(M+logN) algorithm).
+
+*  Suffix Tries and Suffix Trees (Suffix Trees, simply compress the paths 
+   without branching in the Suffix Tries).
+
+  Suffix Trees can be used to generate the Suffix Array by a DFS that follows
+  the "lexicographic" ordering on the edge labels to decide which neighbour
+  to visit next. Assuming Suffix Trees can be constructed in linear time
+  (take it in faith) this gives a linear time method to get Suffix Arrays.
+
+  Observe that Suffix Trees have more information. One can walk up the Trees
+  from two leaves representing different suffixes to the point where the paths
+  meet to determine their longest common prefix. It turns out that this is
+  all that that Suffix Trees have in extra. As we shall see in the next class
+  Suffix Array plus this longest common prefix information can be used to
+  construct the Suffix Tree. Moreover Suffix Arrays can be used to construct
+  the LCP information in linear time!
+
+  Suffix trees are pretty useful!  You can solve the pattern checking problem
+  (yes/no version, the counting version, listing all suffixes beginning with
+   the pattern etc) by just walking down the tree from the root along the path
+  labelled by the pattern. (Not surprising since STs can give you SAs and SAs
+  can solve these problems).
+
+Sources: 
+ * The source I used is here: 
+    http://web.stanford.edu/class/cs97si/suffix-array.pdf 
+   It is actually very clever, though a bit dense and difficult to parse.
+ 
+ * After the class I found what seems to be a better source (at least looks
+   better, but I have not read it):
+   https://cp-algorithms.com/string/suffix-array.html
+
+ * The slides I used for the examples etc. today are from here:
+    http://web.stanford.edu/class/archive/cs/cs166/cs166.1146/lectures/10/Small10.pdf and
+    http://web.stanford.edu/class/archive/cs/cs166/cs166.1146/lectures/11/Small11.pdf
+

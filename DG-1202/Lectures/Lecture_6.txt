@@ -1,0 +1,25 @@
+Space complexity of Bellman-Ford Algorithm
+------------------------------------------
+
+Even though the recurrence for BF algorithm is 2 dimensional, observe
+that a) we only need the last column for the final answer b) each column
+depends only on the previous columns. So, it suffices to maintain just
+2 columns at each point in the execution of the algorithm. This will 
+result in a O(V) space and O(VE) time algorithm.
+
+The Floyd Warshall's Algorithm.
+------------------------------
+
+Lecture 22, page 7: Jeff Erickson's lecture notes.
+
+Edit Distance.
+--------------
+
+Lecture 5, page 8. Section 5.5. Jeff Erickson's lecture notes.
+
+Subset sum.
+----------
+
+Lecture 5, page 12. Section 5.6.1. Jeff Erickson's lecture notes.
+
+

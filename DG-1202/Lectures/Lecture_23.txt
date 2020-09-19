@@ -1,0 +1,44 @@
+--- Linear programming.
+  Maximize of minimize a linear function w.r.t. a set of linear constraints
+  Network Flow as a linear program
+  Dual of a linear program
+
+--- What if we wish to optimize over integer values?
+  Integer Linear Programs
+
+NP Completeness:
+
+Problems for which "checking" a solution can be done efficiently, but
+finding a solution seems hard.
+
+Examples: 
+  Is there a vertex cover of size K?
+  Is there an Independent set of size k? 
+  "Reducing these to each other" (easy example)
+  Vertex cover can be "reduced" to Integer linear Programming. 
+
+  Earlier use of reductions: Matching reduces to Flows. So, efficient
+  solution to flows gives efficient solution to Matching.
+  Now: A reduces B. We have no way of solving A efficiently nor do we
+  expect to find one. So, we conclude we have no hope of finding one
+  for B as well.
+  
+  The satisfiability problem for boolean formulas.
+  Conjunctive Normal form and 3CNF
+  
+  Satisfiability of 3CNF reduces Independent sets in graphs.
+  A vague argument as to why every problem in "NP" should reduce to satisfiability. Take a reduction from satisfiability to 3CNF in faith.
+  Thus, all of the above problems (VC, Ind Set, ILP) are also hard! Everything
+  in NP reduces to them as well. 
+
+How to get around NP completeness? 
+
+  2 approximation for vertex cover. 
+  Other NP complete problems cannot be approximated upto contant factors.
+  What if we allow coin tosses and only expect the algorithm to approximate
+  well with high probability ....
+
+
+
+  
+

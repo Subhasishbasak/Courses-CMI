@@ -1,0 +1,132 @@
+Test 1.
+
+---- Keep number of -ve numbers seen so far.
+
+---- Modify  LAS to also check if the number of -ve numbers <= 1
+
+---- (n/2,n/2) then (3n/4,n/4) or otherway around and so on. 
+
+Problem 6 Lecture 19 (JE's notes)
+
+--- Hamiltonian path in a DAG. 
+
+    Find longest path. Use the Topological sort idea or use DFS.
+
+--- Maximum weighted path from s to t? (given a source s and a sink t)
+
+    Similar to above.
+
+--- Count number of paths from s to t
+
+    Similar to longest path. If u1, ... uk are the vertices with 
+    an incoming edge into v. Then no. of paths from s to v is 
+    Sum_i (no. of paths from s to ui).
+
+
+Exercise: Problem 7, Lecture 19, Jeff Erickson's Notes.
+
+
+Problem 2b, Lecture 20, JE's Notes:
+
+Let e be a unique max wt edge in a cycle C in a weighted connected graph G.
+Then e does not appear in any MCST of G.
+   
+   Suppose e appears in MCST T. Let S and V-S  be the division induced
+   by its deletion from T. At least one other edge f of the cycle C has
+   boundaries across S to V-S.  So, swapping e for f gives
+   a lower cost ST. Contradiction.
+
+Max wt edge in any cycle can be excluded in a MCST.
+    
+   Same argument as above. Except the swap may be with a edge with
+   identical weight. Still, MCST without e is witnessed.
+
+Problem 2c, Lecture 20, JE's Notes:
+
+Prove or disprove: MCST includes the minimum weight edge in every cycle
+in G. 
+
+No. Create cycle of fixed cost edges and then add addition cycles to make
+each of these a min cost edge in that cycle. Clearly not all of them can 
+be picked.
+
+
+Problem 6a, Lecture 20, JE's Notes:
+
+Given weighted connected graph G and a MCST T.   Suppose the wt of
+one edge e is decremented by delta. Find the MCST in the resulting graph G'.
+
+Suppose, T is the MCST in G  with weight d and weight of e has been reduced
+from x to y.  
+
+If e is part of T, then T now has weight  d + y - x in G'. We claim T is the 
+MCST of G'.  If T'  in G' has even lower weight d' < d + y - x then by
+treating it as a ST in G results in a spanning tree with weight d' + x - y.
+But d' < d + y -x and so d' + x - y > d which is a contradiction.
+
+If e is not part of T: Add e to T and remove max cost edge f in the resulting
+cycle C to get T'.  So wt of T' = d + nwt(e) - nwt(f).
+
+Claim T' is MCST in G'. To see this suppose that T'' is a MCST of G' with 
+wt(T'') < wt(T').  
+
+If T'' does not use e then it is also an MCST in T and so its wt is d. But wt
+of T' <= d. This contradicts our assumption that wt(T'') < wt(T')
+
+So, T'' uses e. Deleting e in T'' breaks G' into two parts S and V-S. 
+The cycle C induced by e in T+e contains at least one other
+edge  g that connects these two parts. Since T'' is an MCST in G', 
+all such edges must have wt(g) >= nwt(e) [by the cut Lemma]. 
+So if wt of T'' is d'' then by adding g and removing e we have an ST for 
+G of wt d'' - nwt(e) + wt(g).
+
+Then,   d'' - nwt(e) + wt(g) >=  d (since T is an MCST).  Therefore 
+d'' >= d + nwt(e) - wt(g) >= d + nwt(e) - nwt(f) [f is max wt edge in C and 
+g is in C]. Therefore d'' >= d'.
+
+
+
+Problem 7 Lecture 24 (JE's Notes).
+
+Dominoe tiling a chessboard with holes.  Existence of matching of size
+N/2 in a bipartite graph. [Squares are vertices. Edge between two
+vertices if they can be tiles by a domino. Thus tiling exists iff
+this bipartite graph has a matching of size N/2].
+
+Problem 8 Lecture 24 (JE's Notes).
+
+A N x N board where some squares are blocked. Put tokens in unblocked
+square so that there is exactly one in each row and one in each column.
+
+Rows and columns are vertices. Edges are the squares that are not 
+blocked. Look for a matching that touches all vertices.
+
+
+Problem 12, Lecture 24 (JE's Notes).
+
+n classes. r rooms. t time slots. E[i] is enrollment in class i.
+S[i] is size of room. Assign room and time slot to each course.
+
+Add vertices s, t and one for each class and one for each room. 
+Edge from s to class of capacity 1. Edge from ci to rj iff size
+of class ci is <= capacity or room rj. Edge from rj to t with 
+capacity t. Check that there is a flow of saturating all edges
+out of s iff there is a valid assignment.
+
+
+Problem 14a, Lecture 24 (JE's Notes)
+
+A matrix with real entries. Each row and column have integeral sum.
+Round up or Round down each entry so that resulting matrix has the
+same row and column sums as before. (If impossible indicate that).
+
+Vertices for each row and each column. A source s and a target t.
+Edge from s to ri with capacity equal to the sum of the fractional
+parts of row ri. Edge from cj to t with capacity sum of the fractional
+parts of the entries in column j. Edge from ri to cj if the ijth entry
+has a nonzero fractional part.
+
+Check that valid roundings correspond to flows saturating edges
+out of s (and edges into t) and vice versa.
+
+

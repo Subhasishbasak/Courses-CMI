@@ -1,0 +1,65 @@
+Recall:
+
+* A key property in the correctness proof of DFS: if dfs(v) is called
+  and w is reachable from v via vertices that are unmarked at this point
+  then dfs(w) is called and it returns (and w is marked) before dfs(v)
+  returns. The converse is also true: dfs(w) is called after dfs(v) is
+  called and before dfs(v) return only if w is reachable from v via
+  a path of unmarked vertices when dfs(v) is called.
+
+* DFS numbering, DFS Tree.
+
+* All edges in E but not in T (the dfs tree) are "back edges" connecting
+  vertices along the same path from the root to some leaf.
+
+Articulation Points and Bridges in Undirected Grpahs:
+
+* Articulation points in Connected graphs.  Vertices whose deletion 
+  disconnects the graph.
+
+* LowNo of vertices. LowNo(v) = Min ({dfsno(y) | x in T(v) and (x,y) is a 
+                                         backedge} U {sno(v)})
+
+* Characterization of articulation point via the dfs tree and dfs numbering:
+  * The root is an articulation point iff it has at least two children
+  * An internal vertex v in the dfs tree is an articulation  iff there is a 
+    child w of v in the dfs tree such that 
+             LowNo(w) >= dfsno(v)
+
+* Efficient computation of LowNo: If w_1, ..., w_k are the children of v in 
+  the dfstree then 
+
+            LowNo(v) = Min (dfsno(v), LowNo(w_1), ..., LowNo(w_k),
+                            {y | (v,y) is a backedge} )
+
+* Bridge edges in Connected graphs.
+
+* Characterization of bridge edges: Every bridge edge is a dfstree edge
+  and if w is a child of v in the dfstree then (v,w) is a bridge iff 
+  LowNo(w) > dfsno(v).
+
+Strongly Connected Components:
+
+* Strongly connected components (SCCs) in directed graphs
+
+   x ~ y iff there is a path from x to y and a path from y to x
+   ~ is an equivalence relation
+   Its equivalence classes are the strongly connected components.
+
+* The graph induced on the strongly connected components is a directed
+  acyclic graph.
+
+* Finding SCCs: Kosaraju's Algorithm
+
+  Source and Sink components.
+
+  Starting DFS from a sink component would terminate marking only the
+  vertices in that component.
+    
+  Exit numbering or Post numbering of vertices by DFS. The order in which
+  dfs exits the various nodes in the graph.
+
+  PostNo(C) = Max {Post(v) | v in C}
+
+  Key Lemma: If C and D are components with an edge from C to D then 
+             PostNo(C) > PostNo(D)

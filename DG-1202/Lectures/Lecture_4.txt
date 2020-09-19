@@ -1,0 +1,82 @@
+Grid Paths (cont'd)
+-------------------
+
+ One can also simply evaluate the values of P[i,j] in the "right order".
+ Here every element depends on the element to it left and the element
+ above it. Thus, P[1,1] is the only element that does not depend on
+ anything else. Evaluating the values row-wise will mean when we reach
+ P[i,j], the values it depends on P[i-1,j] and P[i,j-1] are already
+ computed. The same works if you evaluate the entries column wise.
+ You can also (perversely) evaluate the entries along "diagonals" - i.e
+ [1,1], then [2,1],[1,2], then [3,1],[2,2],[3,3] next and so on.
+
+Also, modify the algorithm to find a subsegment with maximum sum.
+
+The technique we have used above goes by the name "Dynamic Programming".
+
+ * Find a version of the problem that can be solved on "subproblems" (this
+   also involved identifying "subproblems". For eg. BSS was not exactly
+   reducible to subproblems by BSuf was.
+
+ * Find the right notion of subproblems and the dependencies and ensure
+   there is no cyclicity. They form a "DAG"
+
+ * Write the recursive definition as a recursive program but remember to
+   use memoization. This is the top down manner of programming it.
+
+ * or equivalently write the bottom up version. This is the bottom-up way.
+
+The key difference from the divide and conquer is that the subproblems
+are not indepedent but overlapping and so one has to be careful about
+the evaluation order and storing intermediate values.
+
+------
+
+Gridpaths: The optimization version. Each entry in the grid is a number
+>= 0. Paths can move right or down, cannot enter a 0 valued cell. Value
+of a path is the sum of the values in the cells visited. Modify the
+above algorithm to compute the maximum valued path from [1,1] to [M,N].
+
+-------
+
+* Longest Common Subsequence. 
+
+  Dynamic programming solution: 
+
+   A[1..M]
+   B[1..N]
+   LCS[i,j] : Length of longest common subsequence of A[i..M] and B[j..N].
+
+   Observation: If A[i] (or B[j]) is part of the solution then it can be
+   "mapped" to the left most occurrence in the other word. In particular,
+   if A[i] = B[j], then there is a longest common subsequence that include
+   (both of) these positions. (Why?)  Also, if A[i] =/= B[j] both of 
+   them cannot appear in any common subsequence. Thus:
+
+   LCS[i,j] = if A[i] = B[j] then 1 + LCS[i+1,j+1]
+              else Max(LCS[i,j+1],LCS[i+1,j]).
+
+   LCS[M,j] is 1 if A[M] appears among B[j] ... B[N] 
+               0 otherwise
+  
+   LCS[i,N] is 1 if B[N] appears among A[i] .. A[M]
+               0 otherwise.
+
+   Actually, we can simply the base cases.  Even the one letter case
+   can be reduced using the same recurrence to the 0 letter case (if i > M
+   or j > N, then that word is empty and the LCS of that word with any
+   word has length 0). Thus we may instead use:
+
+   LCS[M+1,j] = LCS[i,N+1] = 0 as the base cases.
+
+   The answer we need is at LCS[1,1].   We can program this by recursion
+   plus memoization or "bottom up" (in which order?)
+
+   How do you find a witness subsequence of the longest length?
+   Start with (1,1). At each (i,j) if A[i] = A[j], add this letter to the
+   witness subsequence and move to (i+1,j+1). Otherwise move to (i+1,j)
+   or (i,j+1) depending on whose LCS value is bigger. ... 
+
+   Sources: Introduction to Algorithms by Charles E. Leiserson, Clifford Stein,
+   Ronald Rivest, and Thomas H. Cormen, 3rd Edition, Section 15.4.
+

@@ -1,0 +1,79 @@
+Ford Fulkerson Theorem:  maxflow = mincut
+
+Proof: Via Augmenting paths. 
+Naive idea of find paths from s to t where every edge has a "leeway" between
+capacity and flow does not work. A slight generalization does. Augmenting
+path is a sequence
+
+s --- v1 ---- v2 ----- v3 ...   vk ---- t
+
+where each of the edges are either ----> or <---- (i.e taken as it is present
+in the network or in the opposite direction) where futher every edge has
+a nonzero leeway. For forward edges ----> leeway is capcity - flow.
+For reverse edges <---- it is the flow. The idea is to take the minimum
+leeway l and increase all forward edge flows by l and decrease all backward
+edge flows by l along this augmenting path. Easy to check it still remains
+a flow and that the net flow increases by l. 
+
+One way to think of this via an "Residual Graph". Given a network G and
+a flow f (where we assume that for any u,v you never have both the u-->v
+and v-->u edges. If necessary, this can be arranged by the addition of
+one extra vertex) we consider a new graph where the edges are as follows:
+  a. If u ---> v is an edge and f(u,v) < c(u,v) then u---->v is an 
+     edge in the residual graph with capacity c(u,v) - f(u,v)
+  b. if u ---> v is an edge with f(u,v) > 0 then v ---> u is an edge
+     in the residual graph with capacity f(u,v).  
+Then an augmenting path w.r.t. f in G is nothing but a path from s to t
+in this residual graph. 
+
+If there is no augmenting path to t then take the S to be the set
+ of vertices reachable from s by augmenting paths and T to be the rest.
+Clearly flow on all edges from s to t must be equal to capacity and flow
+on all edges from T to S must be 0. Thus, |f| is equal to the sum of the
+capacity of this cut. 
+
+Thus, the max flow of a network always equals the size of its minimum cut.
+Thus, we may find the maxflow by simply starting with empty flow, repeatedly
+finding augmenting paths till no augmenting paths can be found. The resulting
+flow is optimal as there is a cut with the same capacity. This algorithm
+is guaranteed to terminate if the capacities are integers or rationals.
+
+Integrality. If all the capacities are integer then clearly the leeway in
+each round and hence the flow in the next round will all be integers. So,
+there is a max flow where all flows are integers.
+
+Augmenting paths can be found by BFS or DFS and since the flow is
+increased by at least 1 in each iteration of the algorithm termination
+will happen within |f*| iterations where f* is the maximal flow.
+The complexity is therefore O(|f*|.|E|).
+
+However, this is no polynomial time due to the dependency on f*.
+There two ways (at least) to get polynomial time algorithms
+
+Method 1: Always find an augmenting path with maximum leeway. 
+(This can be done by a greedy algorithm that grows a tree from s 
+using higher capacity edges first.)  
+
+Here we can show that in the ith iteration, if the maximal flow possible
+in the residual graph is X then the (maximum) leeway is at least X/|E|. 
+In proof, observe that if we look at all vertices reachable from s via edges 
+with capacity > l (l is the maximum leeway) will not include t. Thus
+it defines a cut and the size of this cut is not more than l.|E|. Thus, 
+the maxflow in this residual graph X is  <= l.|E| as required. 
+Thus augmenting by l means that the maximum flow of the next residual
+graph is less by a factor (1 - 1/|E|).
+
+Thus after r iterations, the residual graph can have max flow of at most
+|f*| (1-1/|E|)^r which is < |f*| e^((-1/|E|).r). If we choose r to be
+|E|.log(f*) then we get a strict bound of 1. This means there is no
+augmenting path as capacities are integers.
+
+Thus, after |E|.log(f*) iterations we will not have any more augmenting
+paths (and hence the flow reached is maximal). This gives O(|E|^2 log(f*))
+algorithm which is polynomial.
+
+Exercise. Check that the maximal matching problem can be formulated
+as a network flow problem and that the notion of augmenting paths coincide.
+
+
+Source: Jeff Erickson's Lecture Notes. Lecture 23 (Maximum Flows and Minimum Cuts). Upto Section 23.4 and then 23.6.1

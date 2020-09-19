@@ -1,0 +1,27 @@
+*  Why is Huffman's codes optimal even among all Uniquely Decodable Codes?
+
+a) Entropy.
+
+b) ABP of any Uniquely Decodable Code >= H(S) (assuming kraft-mcmillan)
+
+c) Prove that there is a prefix code with ABP <= H(S) + 1 using the "converse"
+of kraft inequality.
+
+Source: Sections 2.1, 2.2 and 3.1 of https://www.cs.cmu.edu/~guyb/realworld/compression.pdf
+
+d) prove converse of kraft inequality
+
+e) Prove kraft-mcmillan inequality
+
+Source: Theorem and proof on Page 2 of https://web.stanford.edu/class/ee376a/files/lecture_6.pdf
+
+* BWT Transform. 
+
+  LF Map and Invertibility. Invertibility is therefore efficient.
+  What about forward?
+
+  Suffix Arrays. Assuming efficient construction of suffix arrays show
+  how to obtain BWT. 
+
+Source: http://www.di.unipi.it/~rossano/files/slides/PhDlunch.pdf
+   

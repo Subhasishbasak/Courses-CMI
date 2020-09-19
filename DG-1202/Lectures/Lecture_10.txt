@@ -1,0 +1,17 @@
+Dijkstra's Shortest Path Algorithm:
+
+  * Correctness Proof.
+
+  * Implementation using Priority Queues. 
+
+
+Source: Algorithm Design (Edition 1) by Jon Kleinberg & Eva Tardos, Section 4.4. 
+Minimum Cost Spanning Trees in Weighted Graphs:
+
+  * Prim's Algorithm
+ 
+  * Kruskal's Algorithm
+
+  * The Cut Lemma and its use in proving these algorithms.
+
+Source: Algorithms by S. Dasgupta, C.H. Papadimitriou, and U.V. Vazirani, Section, Section 5.1.1 to 5.1.3 and 5.1.5

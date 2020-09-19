@@ -1,0 +1,22 @@
+* Compression via Uniquely decodable codes
+ 
+  Prefix Codes 
+
+  Fano Shannon Codes
+  
+  Huffman codes and their optimality
+
+Source: Algorithm Design (Edition 1) by Jon Kleinberg & Eva Tardos, 
+        Section 4.8.
+
+* An overview of the Bzip2 algorithm:
+
+  Run length encoding
+  Burrows Wheeler Transform 
+  Move to Front Encoding
+  Run length encoding for 0's
+  Huffman Coding
+  
+Source: https://en.wikipedia.org/wiki/Bzip2
+        For more details: https://github.com/dsnet/compress/blob/master/doc/bzip2-format.pdf 
+

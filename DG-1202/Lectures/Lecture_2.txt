@@ -1,0 +1,23 @@
+1) Integer Multiplication.
+
+--- The naive divide and Conquer
+--- Karat Suba algorithm
+   
+    Complexity of both by solving the recurrences.
+
+Source: Jeff Erickson's notes  section  1.8, 
+        Algorithm Desing (Kleinberg-Tardos) first edition Section 5.5.
+
+
+2) The Median (or Kth largest element) finding Algorithm.
+
+--- Analysis and solution to the recurrence. 
+
+Source: Jeff Erickson's notes section 1.7
+
+3) Closest pair of points on the plane. 
+
+Source: Algorithm Design (Kleinberg-Tardos)  first edition  Section 5.4.
+(Also see slides)
+
+

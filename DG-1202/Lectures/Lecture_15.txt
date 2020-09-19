@@ -1,0 +1,46 @@
+* Recall Suffix Trees.
+
+ Why is the suffix tree linear in size of the input word?
+ [Linear number of leaves, each internal node is branching,
+  so linear number of nodes overall]
+
+ Using Suffix trees to check, count and enumerate occurrences
+ of a pattern (string).
+
+ Finding the length of the longest string that occurs twice or more
+ in the given word. (find the internal node with maximum string 
+ depth)
+
+ Finding the length of the longest string that occurs at least k times.
+
+Source: See slides uploaded. These are extracted from:
+
+  http://web.stanford.edu/class/archive/cs/cs166/cs166.1146/lectures/10/Small10.pdf 
+
+* Longest common prefixes (LCP)
+
+  How to use a) The suffix array SA and the length of the LCP of adjacent
+  elements of the SA to construct the ST. Add the suffixes in increasing
+  lexicographic ordering (using the Suf array). To add the next suffix,
+  walk up the right amount from the last added leaf (using the LCP length)  
+  split an edge if necessary and add the next leaf. Observe that each 
+  edge that appears in the final ST is created once and traversed backwards
+  once.  Every temporary edge is split and the splitting leaves behind 
+  one edge that appears in the final ST. So, number of temporary edges 
+  created is no more than the number of final edges (which is linear).
+  Each temporary edge is created and then split and so visited only twice.
+  Thus, overall work done is linear. Observe that we are able to deal with
+  edges as it is without looking at each character labelling them by the
+  use of the LCP lengths. This is what makes the algorithm linear.
+
+  Source: http://web.cs.iastate.edu/~cs548/suffix.pdf, Section 1.2.1 Page 5
+
+* Computing the LCP arrray (giving the LCP lengths of adjacent entries
+  in the Suffix Array) in linear time.
+
+  Source: http://web.cs.ucdavis.edu/~gusfield/cs224f09/lcp09.pdf
+
+* Generalized Suffix Arrays and their application to finding longest common
+  subword in linear time.
+
+  Source: See slides. 

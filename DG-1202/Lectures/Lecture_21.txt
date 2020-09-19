@@ -1,0 +1,63 @@
+1)  N milkman with a1, a2, ... ak litres of milk to deliver
+    M houses with b1, b2, ... bm litres of need
+    pairs (i,j) indicating which j lies in the route of i.
+    No milkman will deliver more than d litres to any home.
+
+    Is it possible for all houses to receive their full quota of milk?
+
+
+    Reduce to Network Flows. Add 2 vertices s and t. Edges from s to
+    Mi (milkman i) of capacity ai. Edge from Hj (house j) to t of capacity
+    bj. Edge from Mi to Hj if j is in the route of i. Capacity of such
+    an edge is d.
+
+
+    All needs are met iff the max flow in the network is b1+b2 ... + bm.
+
+Source: Similar to the assignment problem described in Jeff Erickson. (24.4)
+
+2) Given values i1, ... iK, and o1, ... oK, check if there is a directed
+   graph with K vertices where the jth vertex has indegree ij and outdegree
+   oj.
+
+   Clearly a necessary condition is that Sum of the indegree must equal
+   the sum of the outdegrees. Let this sum be e.
+
+   Construct a Network with vertices s, t, I1, ... IK and O1, ... OK.
+   Edges from Ox to Iy for all x,y of capacity 1. (a flow of one here
+   "represents" the edge from vertex i to vertex j.) Edge from s to Oj
+   of capacity oj. Edge from Ij to t of capacity ij. Verify that there
+   is a max flow of e in this network iff we can find a directed graph
+   with the given indegrees and outdegrees. Graph to flow is trivial.
+   The other direction is also direct, just use integerality.
+
+3) Project selection: An example of the use of min cuts.
+
+Source: Jeff Erickson's notes, Section 24.6
+
+
+4) Circulation problem with demands. A directed graph. No s, t given.
+   Given values dv (demand) for each vertex v indicating desired outflow -
+inflow for vertex v (thus positive means the vertex will be a source, negative
+means it is a sink) find if there is a value for the flow on each edge that
+meets these requirements.
+
+   Reduction to Network flow.
+
+Source: Kleinberg and Tardos. Section 7.7
+
+
+5) What if we had lower bounds per channel in addition to capacities?
+   Can we check if there is a circulation meeting these requirements?   
+    
+   Reduction to flows with demands.
+ 
+   Idea. First create a flow with only the lowerbounds on each edge.
+   Compute the output - input at each vertex, say Xv. 
+
+   Now go back to the original graph, replace all capacities by capacity
+   minus lowerbound. Add -Xv as the demand at each node v. Solve
+   circulation on this.
+
+Source: Kleinberg and Tardos. Section 7.7
+
