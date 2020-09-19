@@ -1,3 +1,6 @@
 [submodule "DG-1103/Python"]
 	path = DG-1103/Python
 	url = https://github.com/Subhasishbasak/Python.git
+[submodule "CGE-136/image_processing"]
+	path = CGE-136/image_processing
+	url = https://github.com/Subhasishbasak/image_processing.git
