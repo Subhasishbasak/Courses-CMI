@@ -11,4 +11,6 @@ A repository for my postgraduate course-work
 	- `DG-1202` : Design & Analysis of Algorithms
 - **Semester IV**
 	- `AGE-001` : Bayesian Data Analysis
+	- `CGE-136` : Computer vision
+	- `CGE-096` : Natural Language Processing
 
