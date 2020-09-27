@@ -8,6 +8,7 @@ TODO: remaining files to be uploaded
 - **Semester I**
 	- `DG-1102` : Probability & Statistics with R
 	- `DG-1103` : Programming & Data Structures with Python
+	- `DG-1105` : RDBMS, SQL & Visualization
 - **Semester II**
 	- `DG-1203` : Data Mining & Machine Learning
 	- `DG-1202` : Design & Analysis of Algorithms
