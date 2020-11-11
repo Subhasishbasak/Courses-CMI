@@ -19,5 +19,5 @@ TODO: remaining files to be uploaded
 	- `CGE-136` : Computer vision
 	- `CGE-096` : Natural Language Processing
 - **miscellaneous**
-	- `SOP` : SOP, resume templates of CMI-ites
+	- `templates` : SOP, resume templates of CMI-ites
 
