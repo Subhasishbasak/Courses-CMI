@@ -14,6 +14,7 @@ TODO: remaining files to be uploaded
 	- `DG-1202` : Design & Analysis of Algorithms
 - **Semester III**
 	- `CGE-129` : Information retrieval
+	- `AG-2204` : Regression & Classification	
 - **Semester IV**
 	- `AGE-001` : Bayesian Data Analysis
 	- `CGE-136` : Computer vision
